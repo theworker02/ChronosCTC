@@ -10,12 +10,13 @@
 </p>
 
 <p align="center">
+  <a href="https://mloon25.github.io/cronos-ctc/"><img alt="pages" src="https://img.shields.io/badge/GitHub%20Pages-live-2EE6D6?style=for-the-badge"/></a>
+  <a href="https://github.com/Mloon25/cronos-ctc/actions/workflows/ci.yml"><img alt="ci" src="https://img.shields.io/github/actions/workflow/status/Mloon25/cronos-ctc/ci.yml?branch=main&style=for-the-badge&label=CI"/></a>
+  <a href="https://crates.io/crates/ctc-cosmos"><img alt="crates.io" src="https://img.shields.io/crates/v/ctc-cosmos?style=for-the-badge&color=149E96"/></a>
   <img alt="version" src="https://img.shields.io/badge/version-0.6.0-2EE6D6?style=for-the-badge"/>
   <img alt="phase" src="https://img.shields.io/badge/phase-6%20Novikov-0B1220?style=for-the-badge"/>
   <img alt="license" src="https://img.shields.io/badge/license-Apache%202.0-C9A227?style=for-the-badge"/>
   <img alt="rust" src="https://img.shields.io/badge/rust-edition%202021-orange?style=for-the-badge"/>
-  <img alt="crates" src="https://img.shields.io/badge/workspace%20crates-19-149E96?style=for-the-badge"/>
-  <img alt="build" src="https://img.shields.io/badge/cargo%20test-passing-success?style=for-the-badge"/>
 </p>
 
 ---
@@ -85,6 +86,30 @@ cronos-ctc/
 2. **Seal** rewrites live solver ε, signal Deutsch gate, mesh hop latency, holo ratio, thermo/GC
 3. **Tick** runs holographic boundary solves with Landauer ↔ GC coupling
 4. **Horizon** checkpoints the sealed universe for process resurrection
+
+## Website
+
+The project site is built from [`site/`](site/) and deployed by GitHub Actions to
+
+**https://mloon25.github.io/cronos-ctc/**
+
+```bash
+# local preview
+python3 -m http.server --directory site 8080
+```
+
+## Publishing
+
+Crates publish via [`scripts/publish-crates.sh`](scripts/publish-crates.sh) (also `.github/workflows/publish-crates.yml`).
+
+Required secrets:
+- `CARGO_REGISTRY_TOKEN` — crates.io API token
+- GitHub Actions `GITHUB_TOKEN` — pages/release (automatic)
+
+```bash
+# dry-run locally
+./scripts/publish-crates.sh --dry-run --allow-dirty
+```
 
 ## Brand assets
 

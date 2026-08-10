@@ -1,0 +1,55 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "assets/**"
+      - ".github/workflows/pages.yml"
+      - "README.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -R site/. _site/
+          mkdir -p _site/assets
+          cp assets/logo.svg assets/logo.png _site/assets/
+          # Keep README discoverable from the site root
+          cp README.md CHANGELOG.md LICENSE _site/ 2>/dev/null || true
+          # GitHub Pages project-site base path helper
+          if [ -n "${{ github.event.repository.name }}" ]; then
+            printf '%s\n' "${{ github.event.repository.name }}" > _site/.repo-name
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

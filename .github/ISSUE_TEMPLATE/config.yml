@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Cronos-CTC site
+    url: https://mloon25.github.io/cronos-ctc/
+    about: Project GitHub Pages site
+  - name: crates.io org search
+    url: https://crates.io/search?q=ctc-
+    about: Published Cronos-CTC crates

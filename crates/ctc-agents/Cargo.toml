@@ -5,8 +5,11 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Autonomous cross-temporal navigation and repair agents"
 readme = "README.md"
+include = ["src/**/*", "Cargo.toml", "README.md", "assets/**/*"]
 
 [dependencies]
 ctc-dag = { workspace = true }

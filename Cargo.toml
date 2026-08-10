@@ -29,29 +29,30 @@ license = "Apache-2.0"
 authors = ["Cronos-CTC Systems Architecture"]
 readme = "README.md"
 repository = "https://github.com/Mloon25/cronos-ctc"
-homepage = "https://github.com/Mloon25/cronos-ctc"
+homepage = "https://mloon25.github.io/cronos-ctc/"
 keywords = ["ctc", "chronal", "retrocausal", "fixed-point", "holography"]
 categories = ["compilers", "science", "simulation"]
 
 [workspace.dependencies]
-ctc-dag = { path = "crates/ctc-dag" }
-ctc-kernel = { path = "crates/ctc-kernel" }
-ctc-compiler = { path = "crates/ctc-compiler" }
-ctc-pruner = { path = "crates/ctc-pruner" }
-ctc-bridge = { path = "crates/ctc-bridge" }
-ctc-gc = { path = "crates/ctc-gc" }
-ctc-inspector = { path = "crates/ctc-inspector" }
-ctc-signal = { path = "crates/ctc-signal" }
-ctc-oracle = { path = "crates/ctc-oracle" }
-ctc-mesh = { path = "crates/ctc-mesh" }
-ctc-ledger = { path = "crates/ctc-ledger" }
-ctc-agents = { path = "crates/ctc-agents" }
-ctc-collapse = { path = "crates/ctc-collapse" }
-ctc-holo = { path = "crates/ctc-holo" }
-ctc-entropy = { path = "crates/ctc-entropy" }
-ctc-genesis = { path = "crates/ctc-genesis" }
-ctc-horizon = { path = "crates/ctc-horizon" }
-ctc-cosmos = { path = "crates/ctc-cosmos" }
+# path + version required so `cargo publish` can resolve crates.io dependents
+ctc-dag = { path = "crates/ctc-dag", version = "0.6.0" }
+ctc-kernel = { path = "crates/ctc-kernel", version = "0.6.0" }
+ctc-compiler = { path = "crates/ctc-compiler", version = "0.6.0" }
+ctc-pruner = { path = "crates/ctc-pruner", version = "0.6.0" }
+ctc-bridge = { path = "crates/ctc-bridge", version = "0.6.0" }
+ctc-gc = { path = "crates/ctc-gc", version = "0.6.0" }
+ctc-inspector = { path = "crates/ctc-inspector", version = "0.6.0" }
+ctc-signal = { path = "crates/ctc-signal", version = "0.6.0" }
+ctc-oracle = { path = "crates/ctc-oracle", version = "0.6.0" }
+ctc-mesh = { path = "crates/ctc-mesh", version = "0.6.0" }
+ctc-ledger = { path = "crates/ctc-ledger", version = "0.6.0" }
+ctc-agents = { path = "crates/ctc-agents", version = "0.6.0" }
+ctc-collapse = { path = "crates/ctc-collapse", version = "0.6.0" }
+ctc-holo = { path = "crates/ctc-holo", version = "0.6.0" }
+ctc-entropy = { path = "crates/ctc-entropy", version = "0.6.0" }
+ctc-genesis = { path = "crates/ctc-genesis", version = "0.6.0" }
+ctc-horizon = { path = "crates/ctc-horizon", version = "0.6.0" }
+ctc-cosmos = { path = "crates/ctc-cosmos", version = "0.6.0" }
 thiserror = "2"
 parking_lot = "0.12"
 rayon = "1.10"

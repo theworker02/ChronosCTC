@@ -5,12 +5,11 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Cronos-CTC Phase 6 demonstration driver — Novikov closed cosmos"
 readme = "README.md"
-
-[[bin]]
-name = "cronos-ctc"
-path = "src/main.rs"
+include = ["src/**/*", "Cargo.toml", "README.md", "assets/**/*"]
 
 [dependencies]
 ctc-dag = { workspace = true }
