@@ -1,0 +1,28 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/ctc-dag",
+    "crates/ctc-kernel",
+    "crates/ctc-compiler",
+    "crates/ctc-pruner",
+    "crates/ctc-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Cronos-CTC Systems Architecture"]
+
+[workspace.dependencies]
+ctc-dag = { path = "crates/ctc-dag" }
+ctc-kernel = { path = "crates/ctc-kernel" }
+ctc-compiler = { path = "crates/ctc-compiler" }
+ctc-pruner = { path = "crates/ctc-pruner" }
+thiserror = "2"
+parking_lot = "0.12"
+rayon = "1.10"
+nalgebra = "0.33"
+serde = { version = "1", features = ["derive"] }
+smallvec = "1.13"
+rustc-hash = "2"

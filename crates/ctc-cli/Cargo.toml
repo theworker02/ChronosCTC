@@ -1,0 +1,17 @@
+[package]
+name = "ctc-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Cronos-CTC demonstration driver — chronal convergence scenarios"
+
+[[bin]]
+name = "cronos-ctc"
+path = "src/main.rs"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-compiler = { workspace = true }
+ctc-pruner = { workspace = true }
+nalgebra = { workspace = true }
