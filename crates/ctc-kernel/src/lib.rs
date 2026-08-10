@@ -41,5 +41,6 @@ pub use error::{KernelError, KernelResult};
 pub use evolution::{AffineEvolution, EvolutionMap, FnEvolution, NonlinearSystem};
 pub use residual::{ResidualMonitor, ResidualSample};
 pub use solver::{
-    ChronalKernel, ConvergenceClass, FixedPointSolution, SolverConfig, SolverStats,
+    ChronalKernel, ConvergenceClass, FixedPointSolution, IterationObserver, IterationTelemetry,
+    SolverConfig, SolverStats,
 };

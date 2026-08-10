@@ -3,7 +3,7 @@ name = "ctc-cli"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cronos-CTC demonstration driver — chronal convergence scenarios"
+description = "Cronos-CTC Phase 2 demonstration driver — convergence-observation loop"
 
 [[bin]]
 name = "cronos-ctc"
@@ -14,4 +14,9 @@ ctc-dag = { workspace = true }
 ctc-kernel = { workspace = true }
 ctc-compiler = { workspace = true }
 ctc-pruner = { workspace = true }
+ctc-bridge = { workspace = true }
+ctc-gc = { workspace = true }
+ctc-inspector = { workspace = true }
 nalgebra = { workspace = true }
+serde = { workspace = true }
+toml = { workspace = true }

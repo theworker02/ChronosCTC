@@ -1,0 +1,17 @@
+[package]
+name = "ctc-bridge"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Quantum-Classical Fallback Layer — HAL, FPGA/GPU offloader & routing fabric"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-compiler = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+rayon = { workspace = true }
+nalgebra = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }

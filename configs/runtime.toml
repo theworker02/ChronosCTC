@@ -1,0 +1,53 @@
+# Cronos-CTC Phase 2 runtime configuration
+# Solver tolerances, convergence limits, and memory thresholds.
+
+[solver]
+max_iterations = 256
+tolerance = 1e-10
+anderson_m = 6
+anderson_beta = 1.0
+num_restarts = 12
+cluster_eps = 1e-6
+domain_lo = 0.0
+domain_hi = 1.0
+
+[pruner]
+residual_ceiling = 1.0e3
+auto_collapse = true
+
+[bridge]
+# Preferred offload order for retrocausal (CTC) blocks.
+ctc_preference = ["fpga", "quantum_annealer", "gpu", "cpu_emulator"]
+# Classical / acyclic blocks always prefer CPU then GPU.
+classical_preference = ["cpu", "gpu"]
+# Simulated device latencies (nanoseconds per unknown) for scheduling cost model.
+cpu_ns_per_unknown = 50
+gpu_ns_per_unknown = 8
+fpga_ns_per_unknown = 3
+annealer_ns_per_unknown = 1
+emulator_ns_per_unknown = 120
+# Minimum CTC region size before specialized hardware is considered.
+ctc_offload_min_dim = 2
+
+[gc]
+# Branches with probability mass below this floor are entropy-dead.
+amplitude_floor = 1.0e-6
+# Residual above which a branch is treated as toxic / paradoxical.
+toxic_residual = 10.0
+# Epochs older than (max_tau - seal_horizon) become compression candidates
+# once sealed and not referenced by active retrocausal edges.
+seal_horizon = 4
+# Maximum retained parallel branches before forced entropy cull.
+max_live_branches = 32
+# Target heap pressure ratio (0..1) that triggers aggressive collection.
+heap_pressure_trigger = 0.75
+residual_entropy_weight = 0.35
+max_checkpoints = 256
+
+[inspector]
+# Telemetry ring-buffer capacity (residual samples).
+telemetry_capacity = 4096
+# Hotspot threshold: residual component / mean above this is flagged.
+hotspot_sigma = 2.5
+# Default τ scrub window half-width when rendering manifold slices.
+tau_window = 2

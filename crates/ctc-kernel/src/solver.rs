@@ -15,6 +15,26 @@ use crate::residual::ResidualMonitor;
 use nalgebra::DVector;
 use serde::{Deserialize, Serialize};
 
+/// Per-iteration telemetry emitted by observed solves.
+#[derive(Clone, Debug)]
+pub struct IterationTelemetry {
+    pub iteration: usize,
+    pub residual_norm: f64,
+    pub max_abs_component: f64,
+    pub state: Vec<f64>,
+    pub residual: Vec<f64>,
+}
+
+/// Hook for live residual / state streaming (`ctc-inspector`, `ctc-bridge`).
+pub trait IterationObserver {
+    fn on_iteration(&mut self, telem: IterationTelemetry);
+    fn on_restart(&mut self, _restart: usize) {}
+}
+
+impl IterationObserver for () {
+    fn on_iteration(&mut self, _telem: IterationTelemetry) {}
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SolverConfig {
     pub max_iterations: usize,
@@ -160,7 +180,92 @@ impl ChronalKernel {
     pub fn solve_once(
         &self,
         system: &NonlinearSystem,
+        x: DVector<f64>,
+    ) -> KernelResult<(DVector<f64>, usize, f64)> {
+        self.solve_once_observed(system, x, &mut ())
+    }
+
+    /// Like [`solve`](Self::solve) but streams per-iteration telemetry to `obs`.
+    ///
+    /// Used by `ctc-inspector` for live residual manifolds and by `ctc-bridge`
+    /// for mid-flight device migration decisions.
+    pub fn solve_observed<O: IterationObserver>(
+        &self,
+        system: &NonlinearSystem,
+        obs: &mut O,
+    ) -> KernelResult<FixedPointSolution> {
+        let dim = system.dimension();
+        if dim == 0 {
+            return Err(KernelError::EmptySystem);
+        }
+
+        let mut attractors: Vec<(DVector<f64>, usize)> = Vec::new();
+        let mut total_iters = 0usize;
+        let mut best_residual = f64::INFINITY;
+
+        for restart in 0..self.config.num_restarts {
+            obs.on_restart(restart);
+            let x0 = self.initial_guess(dim, restart);
+            match self.solve_once_observed(system, x0, obs) {
+                Ok((x_star, iters, resid)) => {
+                    total_iters += iters;
+                    best_residual = best_residual.min(resid);
+                    self.insert_attractor(&mut attractors, x_star);
+                }
+                Err(KernelError::Diverged { residual, iterations }) => {
+                    total_iters += iterations;
+                    best_residual = best_residual.min(residual);
+                }
+                Err(e) => return Err(e),
+            }
+        }
+
+        let stats = SolverStats {
+            iterations: total_iters,
+            final_residual: best_residual,
+            restarts_used: self.config.num_restarts,
+            fixed_points_found: attractors.len(),
+        };
+
+        if attractors.is_empty() {
+            return Ok(FixedPointSolution {
+                class: ConvergenceClass::Paradox,
+                states: vec![],
+                weights: vec![],
+                stats,
+            });
+        }
+
+        let total_hits: usize = attractors.iter().map(|(_, h)| *h).sum();
+        let weights: Vec<f64> = attractors
+            .iter()
+            .map(|(_, h)| *h as f64 / total_hits as f64)
+            .collect();
+        let states: Vec<Vec<f64>> = attractors
+            .into_iter()
+            .map(|(v, _)| v.iter().copied().collect())
+            .collect();
+
+        let class = if states.len() == 1 {
+            ConvergenceClass::Unique
+        } else {
+            ConvergenceClass::MultiWeighted
+        };
+
+        Ok(FixedPointSolution {
+            class,
+            states,
+            weights,
+            stats,
+        })
+    }
+
+    /// Single-trajectory Anderson solve with per-iteration observation.
+    pub fn solve_once_observed<O: IterationObserver>(
+        &self,
+        system: &NonlinearSystem,
         mut x: DVector<f64>,
+        obs: &mut O,
     ) -> KernelResult<(DVector<f64>, usize, f64)> {
         let mut accel =
             AndersonAccelerator::new(self.config.anderson_m, self.config.anderson_beta)?;
@@ -169,6 +274,15 @@ impl ChronalKernel {
         for iter in 0..self.config.max_iterations {
             let r = system.residual(&x)?;
             let sample = monitor.push(iter, &r);
+            let state_view: Vec<f64> = x.iter().copied().collect();
+            let resid_view: Vec<f64> = r.iter().copied().collect();
+            obs.on_iteration(IterationTelemetry {
+                iteration: iter,
+                residual_norm: sample.norm,
+                max_abs_component: sample.max_abs_component,
+                state: state_view,
+                residual: resid_view,
+            });
             if sample.norm <= self.config.tolerance {
                 return Ok((x, iter + 1, sample.norm));
             }

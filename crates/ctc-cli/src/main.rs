@@ -1,38 +1,48 @@
-//! Cronos-CTC demonstration driver.
+//! Cronos-CTC Phase 2 demonstration driver.
 //!
-//! Runs three chronal scenarios end-to-end:
-//! 1. **Consistent linear CTC** — unique Deutsch fixed point
-//! 2. **Identity multi-attractor** — probability-weighted mixture
-//! 3. **Paradoxical shift** — Paradox Pruner hard-abort path
+//! Implements the **convergence-observation loop**:
+//! 1. State Ingestion — compiler emits retrocausal dependency graph
+//! 2. Parallel Exploration — bridge dispatches \(U(\rho)\) across devices
+//! 3. Real-Time Telemetry — inspector streams residuals / manifold slices
+//! 4. Automated Pruning — GC culls toxic branches and forces re-convergence
+
+mod config;
+mod phase2;
 
 use ctc_compiler::{lower, parse_module};
 use ctc_dag::{DependencyKind, NodeState, SpacetimeAddr, WorldlineDag};
 use ctc_kernel::{
     AffineEvolution, ChronalKernel, ConvergenceClass, FnEvolution, NonlinearSystem, SolverConfig,
 };
-use ctc_pruner::{ParadoxPruner, PruneAction, PrunerConfig};
+use ctc_pruner::{ParadoxPruner, PruneAction};
 use nalgebra::{DMatrix, DVector};
+use phase2::ConvergenceObservationLoop;
 use std::sync::Arc;
 
 fn main() {
     println!("╔══════════════════════════════════════════════════════════╗");
-    println!("║           Cronos-CTC Chronal Runtime v0.1.0              ║");
-    println!("║   Closed Timelike Curve Fixed-Point Execution Engine     ║");
+    println!("║         Cronos-CTC Chronal Runtime v0.2.0 (Phase 2)      ║");
+    println!("║  Inspector · Bridge · Entropy GC · Convergence Loop      ║");
     println!("╚══════════════════════════════════════════════════════════╝\n");
 
-    scenario_consistent_ctc();
+    let runtime = config::load_runtime_config();
+    println!(
+        "config: solver.tol={:.1e}  bridge.ctc_pref[0]={:?}  gc.amplitude_floor={:.1e}\n",
+        runtime.solver.tolerance,
+        runtime.bridge.ctc_preference.first(),
+        runtime.gc.amplitude_floor
+    );
+
+    phase2_consistent_ctc(&runtime);
     println!();
     scenario_multi_weighted();
     println!();
-    scenario_paradox();
+    phase2_paradox_reconverge(&runtime);
 }
 
-fn scenario_consistent_ctc() {
-    println!("── Scenario A: Consistent Linear CTC ──────────────────────");
-    println!("  Deutsch condition: find x = F(x) for retrocausal block");
-    println!("  x@τ0 = 0.5·x + 0.25·y");
-    println!("  y@τ1 = 0.25·x + 0.5·y + 0.5");
-    println!("  analytic fixed point: (x, y) = (2/3, 4/3)\n");
+fn phase2_consistent_ctc(runtime: &config::RuntimeConfig) {
+    println!("── Phase-2 Loop: Consistent Linear CTC ────────────────────");
+    println!("  ingest → bridge(FPGA) → inspector telemetry → GC\n");
 
     let src = r#"
         chronal reg x @ τ0;
@@ -43,53 +53,61 @@ fn scenario_consistent_ctc() {
     "#;
 
     let module = parse_module("consistent_ctc", src).expect("parse");
-    let mut compiled = lower(&module).expect("lower");
-    let kernel = ChronalKernel::new(compiled.meta.solver_config.clone());
-    let solution = kernel.solve(&compiled.system).expect("solve");
+    let compiled = lower(&module).expect("lower");
 
-    let pruner = ParadoxPruner::new(PrunerConfig::default());
-    let branch = pruner.branches.seed_root(&compiled.dag, 0.0);
-    // Seed a stable parent so collapse has somewhere to go if needed.
-    let _ = branch;
+    let mut loop_engine = ConvergenceObservationLoop::from_runtime(runtime);
+    let report = loop_engine
+        .run(compiled)
+        .expect("phase2 loop");
 
-    let report = pruner
-        .observe_solution(branch, &solution, &mut compiled.dag)
-        .expect("prune observe");
-
-    println!("  convergence class : {:?}", solution.class);
-    for (i, (state, w)) in solution
+    println!("{}", report.manifold_ascii);
+    println!("  {}", report.sparkline);
+    println!("  device            : {:?} ({})", report.device_kind, report.device_id);
+    println!("  block class       : {:?}", report.block_class);
+    println!("  convergence class : {:?}", report.solution.class);
+    for (i, (state, w)) in report
+        .solution
         .states
         .iter()
-        .zip(solution.weights.iter())
+        .zip(report.solution.weights.iter())
         .enumerate()
     {
-        print!("  attractor[{i}] weight={w:.4}  values={{ ");
-        for (name, v) in compiled.meta.unknown_order.iter().zip(state.iter()) {
+        print!("  attractor[{i}] P={w:.4}  {{ ");
+        for (name, v) in report.unknown_order.iter().zip(state.iter()) {
             print!("{name}={v:.8} ");
         }
         println!("}}");
     }
+    if !report.hotspots.is_empty() {
+        println!("  hotspots          :");
+        for h in &report.hotspots {
+            println!(
+                "    component {} ({})  r={:.3e}  σ={:.2}",
+                h.component,
+                h.label.as_deref().unwrap_or("?"),
+                h.value,
+                h.sigma_ratio
+            );
+        }
+    } else {
+        println!("  hotspots          : (none at lock)");
+    }
     println!(
-        "  solver stats      : iters={} residual={:.3e} restarts={}",
-        solution.stats.iterations,
-        solution.stats.final_residual,
-        solution.stats.restarts_used
+        "  GC                : {}",
+        report.gc_message.as_deref().unwrap_or("(idle)")
     );
-    println!("  pruner action     : {:?}", report.action);
+    println!("  pruner            : {:?}", report.prune_action);
     println!(
-        "  worldline edges   : {} retrocausal",
-        compiled.dag.retrocausal_edges().len()
+        "  residual trend    : {} samples, final={:.3e}, reconverge={}",
+        report.telemetry_samples,
+        report.solution.stats.final_residual,
+        report.reconverge_attempts
     );
-
-    // Apply solution into the DAG fabric.
-    apply_solution_to_dag(&mut compiled.dag, &compiled.meta.unknown_order, &solution);
-    println!("  fabric locked     : {} spacetime cells", compiled.dag.len());
 }
 
 fn scenario_multi_weighted() {
     println!("── Scenario B: Multi-Attractor Identity CTC ───────────────");
-    println!("  F(x) = x on [0,1] — continuum of fixed points");
-    println!("  kernel clusters multi-start landings → Deutsch mixture\n");
+    println!("  F(x) = x on [0,1] — Deutsch mixture via multi-start\n");
 
     let evo = Arc::new(FnEvolution::new(1, |x| x.clone()));
     let system = NonlinearSystem::new("identity_ctc", evo, vec!["ρ".into()]).unwrap();
@@ -114,80 +132,59 @@ fn scenario_multi_weighted() {
             state[0], w
         );
     }
-    let wsum: f64 = solution.weights.iter().sum();
-    println!("  Σ weights         : {wsum:.6}");
 }
 
-fn scenario_paradox() {
-    println!("── Scenario C: Paradoxical Affine Shift ───────────────────");
-    println!("  F(x) = x + 1  ⇒  no real fixed point (empty solution set)");
-    println!("  expected: ConvergenceClass::Paradox → Pruner HardAbort\n");
+fn phase2_paradox_reconverge(runtime: &config::RuntimeConfig) {
+    println!("── Phase-2 Loop: Paradox → GC Re-converge ─────────────────");
+    println!("  F(x)=x+1 has no fixed point; GC prunes toxic timeline\n");
 
     let evo = Arc::new(AffineEvolution {
         a: DMatrix::identity(1, 1),
         b: DVector::from_vec(vec![1.0]),
     });
     let system = NonlinearSystem::new("paradox_shift", evo, vec!["x".into()]).unwrap();
-    let mut cfg = SolverConfig::default();
+    let mut cfg = runtime.solver.to_kernel_config();
     cfg.max_iterations = 48;
     cfg.num_restarts = 4;
-    cfg.tolerance = 1e-12;
 
     let solution = ChronalKernel::new(cfg).solve(&system).unwrap();
 
     let mut dag = WorldlineDag::new();
     let n0 = dag.allocate(SpacetimeAddr::new(0, 0), NodeState::scalar(0.0));
     let n1 = dag.allocate(SpacetimeAddr::new(0, 1), NodeState::scalar(1.0));
+    let n_hist = dag.allocate(SpacetimeAddr::new(1, -3), NodeState::scalar(0.9));
     dag.add_dependency(n1, n0, DependencyKind::Retrocausal)
         .unwrap();
     dag.retro_write(SpacetimeAddr::new(0, 1), Arc::from([2.0]))
         .unwrap();
+    let _ = n_hist;
 
-    let pruner = ParadoxPruner::default();
-    // Only one branch — paradox should hard-abort.
-    let branch = pruner.branches.seed_root(&dag, 0.0);
-    // Force the root into the solve observation as the failing branch.
+    let pruner = ParadoxPruner::new(runtime.pruner.clone());
+    let root = pruner.branches.seed_root(&dag, 1e-12);
+    // Fork a speculative child that will absorb the paradox.
+    let child = pruner.branches.fork(root, &dag).unwrap();
     let report = pruner
-        .observe_solution(branch, &solution, &mut dag)
+        .observe_solution(child, &solution, &mut dag)
+        .unwrap();
+
+    let mut gc = ctc_gc::TimelineGc::new(runtime.gc.clone());
+    let gc_report = gc
+        .force_reconverge_cleanup(&mut dag, &pruner.branches)
         .unwrap();
 
     println!("  convergence class : {:?}", solution.class);
-    println!(
-        "  final residual     : {:.3e} (iters={})",
-        solution.stats.final_residual, solution.stats.iterations
-    );
     println!("  pruner action     : {:?}", report.action);
-    println!("  message           : {}", report.message);
+    println!("  active branch     : {:?}", pruner.branches.active());
+    println!("  GC                : {}", gc_report.message);
+    println!(
+        "  checkpoints       : {} (compressed {} B)",
+        gc_report.checkpoint_ids.len(),
+        gc.checkpoints.total_compressed_bytes()
+    );
     assert_eq!(solution.class, ConvergenceClass::Paradox);
-    assert_eq!(report.action, PruneAction::HardAbort);
-    println!("  verdict           : timeline rejected (paradox pruned)");
-}
-
-fn apply_solution_to_dag(
-    dag: &mut WorldlineDag,
-    order: &[String],
-    solution: &ctc_kernel::FixedPointSolution,
-) {
-    if solution.states.is_empty() {
-        return;
-    }
-    // Lock the primary (highest-weight) attractor into the fabric.
-    let (idx, _) = solution
-        .weights
-        .iter()
-        .enumerate()
-        .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())
-        .unwrap();
-    let state = &solution.states[idx];
-    for (i, _name) in order.iter().enumerate() {
-        // Lowering assigned LogicalAddr(i) in allocation order.
-        // Find node by scanning snapshot.
-        if let Ok(snap) = dag.snapshot() {
-            if let Some((addr, _, _)) = snap.nodes.get(i) {
-                let _ = dag.retro_write(*addr, Arc::from([state[i]]));
-            }
-        }
-    }
-    let dirty = dag.dirty_nodes();
-    dag.clear_dirty(&dirty);
+    assert!(matches!(
+        report.action,
+        PruneAction::Collapse { .. } | PruneAction::HardAbort | PruneAction::Invalidate
+    ));
+    println!("  verdict           : toxic timeline pruned; manifold re-convergence armed");
 }
