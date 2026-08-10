@@ -11,6 +11,10 @@ description = "Cronos-CTC Phase 6 demonstration driver — Novikov closed cosmos
 readme = "README.md"
 include = ["src/**/*", "Cargo.toml", "README.md", "assets/**/*"]
 
+[[bin]]
+name = "cronos-ctc"
+path = "src/main.rs"
+
 [dependencies]
 ctc-dag = { workspace = true }
 ctc-kernel = { workspace = true }

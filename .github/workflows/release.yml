@@ -3,6 +3,12 @@ name: Release
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to package (e.g. v0.6.0)"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -13,38 +19,72 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref }}
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build release binary
-        run: cargo build -p ctc-cli --release
+        run: |
+          cargo build -p ctc-cli --release
+          echo "Release binaries:"
+          ls -la target/release/cronos-ctc target/release/ctc-cli 2>/dev/null || true
+          test -x target/release/cronos-ctc
 
       - name: Package artifacts
         run: |
-          TAG="${GITHUB_REF_NAME}"
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
           STAGE="cronos-ctc-${TAG}-x86_64-unknown-linux-gnu"
           mkdir -p "dist/${STAGE}"
-          cp target/release/cronos-ctc "dist/${STAGE}/"
+
+          BIN=""
+          for candidate in target/release/cronos-ctc target/release/ctc-cli; do
+            if [ -x "$candidate" ]; then
+              BIN="$candidate"
+              break
+            fi
+          done
+          if [ -z "$BIN" ]; then
+            echo "No release binary found under target/release/"
+            ls -la target/release || true
+            exit 1
+          fi
+
+          cp "$BIN" "dist/${STAGE}/cronos-ctc"
+          chmod +x "dist/${STAGE}/cronos-ctc"
           cp README.md LICENSE CHANGELOG.md assets/logo.svg assets/logo.png "dist/${STAGE}/"
           if [ -f "releases/${TAG}/RELEASE_NOTES.md" ]; then
             cp "releases/${TAG}/RELEASE_NOTES.md" "dist/${STAGE}/"
           fi
           tar -C dist -czf "dist/${STAGE}.tar.gz" "${STAGE}"
           (cd dist && sha256sum "${STAGE}.tar.gz" > SHA256SUMS)
+          echo "Packaged ${STAGE}.tar.gz from ${BIN}"
 
       - name: Resolve release notes
         id: notes
         run: |
-          if [ -f "releases/${GITHUB_REF_NAME}/RELEASE_NOTES.md" ]; then
-            echo "path=releases/${GITHUB_REF_NAME}/RELEASE_NOTES.md" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          if [ -f "releases/${TAG}/RELEASE_NOTES.md" ]; then
+            echo "path=releases/${TAG}/RELEASE_NOTES.md" >> "$GITHUB_OUTPUT"
           else
             echo "path=CHANGELOG.md" >> "$GITHUB_OUTPUT"
           fi
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.notes.outputs.tag }}
           body_path: ${{ steps.notes.outputs.path }}
           files: |
             dist/*.tar.gz
@@ -52,5 +92,6 @@ jobs:
             assets/logo.svg
             assets/logo.png
           generate_release_notes: true
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
