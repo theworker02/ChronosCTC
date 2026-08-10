@@ -1,24 +1,15 @@
 [package]
-name = "ctc-cli"
+name = "ctc-cosmos"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cronos-CTC Phase 6 demonstration driver — Novikov closed cosmos"
-
-[[bin]]
-name = "cronos-ctc"
-path = "src/main.rs"
+description = "Novikov closed-cosmos runtime — law sealing, holographic ticks, self-sustaining loop"
 
 [dependencies]
 ctc-dag = { workspace = true }
 ctc-kernel = { workspace = true }
-ctc-compiler = { workspace = true }
-ctc-pruner = { workspace = true }
-ctc-bridge = { workspace = true }
 ctc-gc = { workspace = true }
-ctc-inspector = { workspace = true }
 ctc-signal = { workspace = true }
-ctc-oracle = { workspace = true }
 ctc-mesh = { workspace = true }
 ctc-ledger = { workspace = true }
 ctc-agents = { workspace = true }
@@ -27,7 +18,8 @@ ctc-holo = { workspace = true }
 ctc-entropy = { workspace = true }
 ctc-genesis = { workspace = true }
 ctc-horizon = { workspace = true }
-ctc-cosmos = { workspace = true }
-nalgebra = { workspace = true }
+ctc-pruner = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
 serde = { workspace = true }
-toml = { workspace = true }
+nalgebra = { workspace = true }

@@ -1,6 +1,7 @@
 use ctc_agents::AgentConfig;
 use ctc_bridge::{BridgeConfig, DeviceKind};
 use ctc_collapse::CollapseConfig;
+use ctc_cosmos::CosmosConfig;
 use ctc_entropy::EntropyConfig;
 use ctc_gc::GcConfig;
 use ctc_genesis::GenesisConfig;
@@ -41,6 +42,8 @@ pub struct RuntimeConfig {
     pub entropy: EntropyConfig,
     #[serde(default)]
     pub genesis: GenesisConfig,
+    #[serde(default)]
+    pub cosmos: CosmosConfig,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -174,6 +177,7 @@ impl Default for RuntimeConfig {
             holo: HoloConfig::default(),
             entropy: EntropyConfig::default(),
             genesis: GenesisConfig::default(),
+            cosmos: CosmosConfig::default(),
         }
     }
 }

@@ -4,7 +4,10 @@ use crate::landauer::{
     event_for_convergence, event_for_erase, event_for_prune, LandauerOp, ThermoEvent,
 };
 use ctc_collapse::RealitySynthesisReport;
+use ctc_dag::WorldlineDag;
+use ctc_gc::CollectionReport;
 use ctc_holo::ProjectionReport;
+use ctc_ledger::{OmniversalLedger, UniverseId};
 use parking_lot::RwLock;
 use serde::{Deserialize, Serialize};
 
@@ -106,11 +109,32 @@ impl ThermoBalancer {
         Ok(self.record(ev))
     }
 
-    /// Account for a multiversal collapse synthesis.
+    /// Account for a multiversal collapse synthesis (nominal cell counts).
     pub fn account_collapse(&self, synthesis: &RealitySynthesisReport) -> EntropyResult<ThermoReport> {
+        self.account_collapse_detailed(synthesis, None)
+    }
+
+    /// Account collapse using real DAG cell counts from the omniversal ledger.
+    pub fn account_collapse_with_ledger(
+        &self,
+        synthesis: &RealitySynthesisReport,
+        omni: &OmniversalLedger,
+    ) -> EntropyResult<ThermoReport> {
+        self.account_collapse_detailed(synthesis, Some(omni))
+    }
+
+    fn account_collapse_detailed(
+        &self,
+        synthesis: &RealitySynthesisReport,
+        omni: Option<&OmniversalLedger>,
+    ) -> EntropyResult<ThermoReport> {
         let mut events = Vec::new();
-        for _id in &synthesis.pruned {
-            events.push(self.prune_branch(8)?); // nominal cell count per universe
+        for id in &synthesis.pruned {
+            let cells = omni
+                .map(|l| universe_cell_count(l, UniverseId(*id)))
+                .unwrap_or(8)
+                .max(1);
+            events.push(self.prune_branch(cells)?);
         }
         // Winner merge converges residual toward zero-energy state.
         let resid = synthesis
@@ -138,12 +162,75 @@ impl ThermoBalancer {
         })
     }
 
-    /// Drive toward equilibrium: require harvested ≥ fraction of dissipated at convergence.
+    /// Couple a timeline GC collection cycle into the Landauer ledger.
+    pub fn account_collection(&self, report: &CollectionReport) -> EntropyResult<ThermoEvent> {
+        let erased_cells = report.stats.nodes_pruned
+            + report.stats.branches_culled
+            + report.stats.nodes_sealed / 2;
+        let bits = (erased_cells.max(1) as f64) * 64.0;
+        let mut ev = event_for_erase(
+            &self.config,
+            bits,
+            format!(
+                "GC collect pruned={} sealed={} culled={} reclaim≈{}B",
+                report.stats.nodes_pruned,
+                report.stats.nodes_sealed,
+                report.stats.branches_culled,
+                report.stats.bytes_reclaimed_est
+            ),
+        )?;
+        // Pressure relief harvests free energy proportional to Δheap.
+        let relief = (report.heap_pressure_before - report.heap_pressure_after).max(0.0);
+        let harvest = relief * self.config.harvest_per_residual * 1e3;
+        ev.signed_work_j -= harvest;
+        ev.op = LandauerOp::EraseBits;
+        Ok(self.record(ev))
+    }
+
+    /// Account pruning a single universe by measuring its manifold size.
+    pub fn account_universe_prune(
+        &self,
+        ledger: &OmniversalLedger,
+        id: UniverseId,
+    ) -> EntropyResult<ThermoEvent> {
+        let cells = universe_cell_count(ledger, id).max(1);
+        self.prune_branch(cells)
+    }
+
+    /// Hint for GC aggressiveness from the energy ledger.
+    ///
+    /// - Net dissipation → raise heap pressure (cull)
+    /// - Net harvest → retain (lower effective pressure)
+    pub fn gc_pressure_hint(&self, base_pressure: f64) -> f64 {
+        let snap = self.snapshot();
+        let scale = if snap.net_work_j > 0.0 {
+            1.0 + (snap.dissipated_j / (snap.dissipated_j + snap.harvested_j + 1e-40)).min(0.5)
+        } else {
+            (1.0 - (snap.harvested_j / (snap.dissipated_j + snap.harvested_j + 1e-40)).min(0.4))
+                .max(0.35)
+        };
+        (base_pressure * scale).clamp(0.0, 1.0)
+    }
+
+    /// Drive toward equilibrium: require residual ≤ zero-energy gate.
     pub fn assert_equilibrium(&self, residual: f64) -> EntropyResult<()> {
         if residual > self.config.zero_energy_residual {
             return Err(EntropyError::EquilibriumUnreachable(residual));
         }
         Ok(())
+    }
+}
+
+fn universe_cell_count(ledger: &OmniversalLedger, id: UniverseId) -> usize {
+    ledger
+        .with_universe(id, |u| dag_cell_count(&u.dag))
+        .unwrap_or(0)
+}
+
+fn dag_cell_count(dag: &WorldlineDag) -> usize {
+    match dag.snapshot() {
+        Ok(snap) => snap.nodes.len(),
+        Err(_) => dag.len(),
     }
 }
 

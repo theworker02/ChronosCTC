@@ -1,5 +1,5 @@
-# Cronos-CTC Phase 2 runtime configuration
-# Solver tolerances, convergence limits, and memory thresholds.
+# Cronos-CTC Phase 6 runtime configuration
+# Novikov closed cosmos: law sealing, holographic ticks, horizon persistence.
 
 [solver]
 max_iterations = 256
@@ -108,3 +108,10 @@ signal_speed_min = 0.25
 signal_speed_max = 4.0
 boundary_ratio_min = 0.15
 boundary_ratio_max = 0.75
+
+[cosmos]
+sustain_ticks = 4
+drift_recompile_factor = 1.0e6
+checkpoint_every = 2
+horizon_capacity = 32
+require_zero_energy = true

@@ -10,6 +10,7 @@ ctc-dag = { workspace = true }
 ctc-kernel = { workspace = true }
 ctc-ledger = { workspace = true }
 ctc-collapse = { workspace = true }
+ctc-gc = { workspace = true }
 ctc-holo = { workspace = true }
 thiserror = { workspace = true }
 parking_lot = { workspace = true }

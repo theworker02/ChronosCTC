@@ -17,11 +17,13 @@ members = [
     "crates/ctc-holo",
     "crates/ctc-entropy",
     "crates/ctc-genesis",
+    "crates/ctc-horizon",
+    "crates/ctc-cosmos",
     "crates/ctc-cli",
 ]
 
 [workspace.package]
-version = "0.5.0"
+version = "0.6.0"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Cronos-CTC Systems Architecture"]
@@ -43,6 +45,8 @@ ctc-collapse = { path = "crates/ctc-collapse" }
 ctc-holo = { path = "crates/ctc-holo" }
 ctc-entropy = { path = "crates/ctc-entropy" }
 ctc-genesis = { path = "crates/ctc-genesis" }
+ctc-horizon = { path = "crates/ctc-horizon" }
+ctc-cosmos = { path = "crates/ctc-cosmos" }
 thiserror = "2"
 parking_lot = "0.12"
 rayon = "1.10"

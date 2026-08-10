@@ -1,0 +1,16 @@
+[package]
+name = "ctc-horizon"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Event-horizon persistence for sealed cosmos state across process epochs"
+
+[dependencies]
+ctc-genesis = { workspace = true }
+ctc-entropy = { workspace = true }
+ctc-holo = { workspace = true }
+thiserror = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+parking_lot = { workspace = true }
+rustc-hash = { workspace = true }

@@ -1,72 +1,96 @@
-//! Cronos-CTC Phase 5 demonstration driver.
+//! Cronos-CTC Phase 6 demonstration driver.
 //!
-//! Cosmological lifecycle:
-//! 1. Boundary Encoding — project bulk DAG onto holographic screen
-//! 2. Thermodynamic Equilibrium — Landauer work of prune/converge
-//! 3. Reality Compilation — Genesis locks physical law vector Λ*
-//! 4. Self-Sustaining Execution — closed retrocausal cosmos
+//! Novikov closed cosmos:
+//! 1. Genesis locks physical law vector Λ*
+//! 2. Seal rewrites live solver / signal / mesh / holo / thermo / GC
+//! 3. Holographic sustainment ticks with thermo↔GC coupling
+//! 4. Horizon checkpoint persists the sealed universe
 
 mod config;
 mod phase2;
 mod phase3;
 mod phase4;
 mod phase5;
+mod phase6;
 
 use phase2::ConvergenceObservationLoop;
 use ctc_compiler::{lower, parse_module};
 
 fn main() {
     println!("╔══════════════════════════════════════════════════════════╗");
-    println!("║         Cronos-CTC Chronal Runtime v0.5.0 (Phase 5)      ║");
-    println!("║  Holo · Entropy · Genesis — Self-Compiling Spacetime     ║");
+    println!("║         Cronos-CTC Chronal Runtime v0.6.0 (Phase 6)      ║");
+    println!("║  Cosmos · Horizon — Novikov Self-Sustaining Spacetime    ║");
     println!("╚══════════════════════════════════════════════════════════╝\n");
 
     let runtime = config::load_runtime_config();
     println!(
-        "config: holo.ratio={:.2}  T={}K  genesis.meta_epochs={}\n",
+        "config: cosmos.ticks={}  holo.ratio={:.2}  genesis.meta_epochs={}\n",
+        runtime.cosmos.sustain_ticks,
         runtime.holo.boundary_ratio,
-        runtime.entropy.temperature_k,
         runtime.genesis.max_meta_epochs
     );
 
-    phase5_cosmos(&runtime);
+    phase6_novikov(&runtime);
+    println!();
+    phase5_smoke(&runtime);
     println!();
     phase4_smoke(&runtime);
     println!();
     phase2_smoke(&runtime);
 }
 
-fn phase5_cosmos(runtime: &config::RuntimeConfig) {
-    println!("── Phase-5: Cosmological Bootstrap ────────────────────────");
-    println!("  bulk→boundary→Landauer→Genesis Λ* fixed point\n");
+fn phase6_novikov(runtime: &config::RuntimeConfig) {
+    println!("── Phase-6: Novikov Closed Cosmos ─────────────────────────");
+    println!("  Genesis Λ* → seal host → holographic ticks → horizon\n");
 
-    let report = phase5::run_cosmological_lifecycle(runtime).expect("cosmos");
+    let report = phase6::run_novikov_cosmos(runtime).expect("novikov cosmos");
     println!("  {}", report.message);
-    println!("  boundary dim      : {}", report.holo_boundary_dim);
-    println!("  von Neumann S_EE  : {:.6}", report.holo_von_neumann);
-    println!("  Ryu–Takayanagi    : {:.6}", report.rt_entropy);
-    println!("  thermo net work   : {:.6e} J", report.thermo_net_j);
+    println!("  sealed ε (signal) : {:.3e} → {:.3e}", report.seal.before_signal_eps, report.seal.after_signal_eps);
+    println!("  sealed hop (mesh) : {}µs → {}µs", report.seal.before_hop_us, report.seal.after_hop_us);
+    println!("  sealed boundary   : {:.3} → {:.3}", report.seal.before_boundary, report.seal.after_boundary);
+    println!("  laws.ε            : {:.3e}", report.final_laws.deutsch_tolerance);
+    println!("  laws.signal×      : {:.3}", report.final_laws.signal_speed);
+    println!("  final residual    : {:.6e}", report.final_residual);
     println!("  zero-energy state : {}", report.zero_energy);
-    println!("  laws.ε            : {:.3e}", report.laws_deutsch);
-    println!("  laws.signal×      : {:.3}", report.laws_signal);
-    println!("  laws.boundary     : {:.3}", report.laws_boundary);
-    println!(
-        "  meta-epochs       : {} (converged={})",
-        report.meta_epochs, report.meta_converged
-    );
+    println!("  sustainment ticks : {}", report.ticks.len());
+    for t in &report.ticks {
+        println!(
+            "    tick {}: r={:.3e} S_EE={:.4} thermo={:.3e}J GC={} hops≈{}",
+            t.tick,
+            t.residual,
+            t.holo_von_neumann,
+            t.thermo_net_j,
+            t.gc_nodes_pruned,
+            t.teleports_simulated
+        );
+    }
+    if let Some(id) = report.horizon_id {
+        println!("  horizon checkpoint: #{id}");
+    }
     if let Some(w) = report.multiverse_winner {
         println!("  multiverse winner : U{w}");
     }
+}
+
+fn phase5_smoke(runtime: &config::RuntimeConfig) {
+    println!("── Phase-5 Smoke: Cosmological Bootstrap ──────────────────");
+    let report = phase5::run_cosmological_lifecycle(runtime).expect("cosmos");
+    println!(
+        "  boundary={} S_EE={:.4} zero_E={} meta={}",
+        report.holo_boundary_dim,
+        report.holo_von_neumann,
+        report.zero_energy,
+        report.meta_epochs
+    );
 }
 
 fn phase4_smoke(runtime: &config::RuntimeConfig) {
     println!("── Phase-4 Smoke: Multiversal Collapse ────────────────────");
     let report = phase4::run_multiverse_synthesis(runtime).expect("multiverse");
     println!(
-        "  children={} winner=U{} primary={:?} pruned={}",
+        "  children={} winner=U{} pruned={}",
         report.bifurcation_children,
         report.winner,
-        report.primary_state,
         report.pruned.len()
     );
 }

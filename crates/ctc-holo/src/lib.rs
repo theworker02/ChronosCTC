@@ -30,4 +30,6 @@ pub use boundary::{BoundaryCell, BoundarySurface, BoundaryTopology};
 pub use config::HoloConfig;
 pub use entanglement::{EntanglementMatrix, EntanglementSpectrum};
 pub use error::{HoloError, HoloResult};
-pub use projector::{HolographicProjector, ProjectionReport, ReconstructReport};
+pub use projector::{
+    BoundarySolveReport, HolographicProjector, ProjectionReport, ReconstructReport,
+};
