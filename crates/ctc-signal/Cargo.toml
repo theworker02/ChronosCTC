@@ -1,0 +1,15 @@
+[package]
+name = "ctc-signal"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Cross-epoch binary teleportation and memory injection layer"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }
+nalgebra = { workspace = true }

@@ -2,9 +2,12 @@ use ctc_bridge::{BridgeConfig, DeviceKind};
 use ctc_gc::GcConfig;
 use ctc_inspector::InspectorConfig;
 use ctc_kernel::SolverConfig;
+use ctc_mesh::MeshConfig;
 use ctc_pruner::PrunerConfig;
+use ctc_signal::SignalConfig;
 use serde::Deserialize;
 use std::path::Path;
+use std::time::Duration;
 
 #[derive(Clone, Debug, Deserialize)]
 pub struct RuntimeConfig {
@@ -13,6 +16,29 @@ pub struct RuntimeConfig {
     pub bridge: BridgeSection,
     pub gc: GcConfig,
     pub inspector: InspectorConfig,
+    #[serde(default)]
+    pub signal: SignalConfig,
+    #[serde(default)]
+    pub oracle: OracleSection,
+    #[serde(default)]
+    pub mesh: MeshConfig,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+pub struct OracleSection {
+    pub timeout_ms: u64,
+}
+
+impl Default for OracleSection {
+    fn default() -> Self {
+        Self { timeout_ms: 50 }
+    }
+}
+
+impl OracleSection {
+    pub fn timeout(&self) -> Duration {
+        Duration::from_millis(self.timeout_ms)
+    }
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -119,6 +145,9 @@ impl Default for RuntimeConfig {
             },
             gc: GcConfig::default(),
             inspector: InspectorConfig::default(),
+            signal: SignalConfig::default(),
+            oracle: OracleSection::default(),
+            mesh: MeshConfig::default(),
         }
     }
 }

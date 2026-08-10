@@ -8,11 +8,14 @@ members = [
     "crates/ctc-bridge",
     "crates/ctc-gc",
     "crates/ctc-inspector",
+    "crates/ctc-signal",
+    "crates/ctc-oracle",
+    "crates/ctc-mesh",
     "crates/ctc-cli",
 ]
 
 [workspace.package]
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Cronos-CTC Systems Architecture"]
@@ -25,6 +28,9 @@ ctc-pruner = { path = "crates/ctc-pruner" }
 ctc-bridge = { path = "crates/ctc-bridge" }
 ctc-gc = { path = "crates/ctc-gc" }
 ctc-inspector = { path = "crates/ctc-inspector" }
+ctc-signal = { path = "crates/ctc-signal" }
+ctc-oracle = { path = "crates/ctc-oracle" }
+ctc-mesh = { path = "crates/ctc-mesh" }
 thiserror = "2"
 parking_lot = "0.12"
 rayon = "1.10"

@@ -1,0 +1,16 @@
+[package]
+name = "ctc-mesh"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Distributed inter-node temporal entanglement network"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-signal = { workspace = true }
+ctc-oracle = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }

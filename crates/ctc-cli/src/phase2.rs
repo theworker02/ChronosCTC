@@ -20,6 +20,7 @@ use ctc_pruner::{ParadoxPruner, PruneAction};
 use std::sync::Arc;
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)] // full report surface retained for inspector/UI consumers
 pub struct LoopReport {
     pub device_kind: DeviceKind,
     pub device_id: String,
