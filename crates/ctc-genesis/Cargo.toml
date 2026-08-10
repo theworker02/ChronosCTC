@@ -3,7 +3,10 @@ name = "ctc-genesis"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Self-referential laws compiler and reality bootstrap engine"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -18,3 +21,6 @@ parking_lot = { workspace = true }
 serde = { workspace = true }
 rustc-hash = { workspace = true }
 nalgebra = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

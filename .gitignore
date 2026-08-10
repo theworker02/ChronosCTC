@@ -1,7 +1,9 @@
 /target/
 **/*.rs.bk
-Cargo.lock
 .DS_Store
 *.swp
 .idea/
 .vscode/
+# Release binary copies are regenerated; keep notes + checksums tracked.
+releases/*/cronos-ctc
+releases/*/*.tar.gz

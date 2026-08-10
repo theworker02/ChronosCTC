@@ -3,7 +3,10 @@ name = "ctc-cosmos"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Novikov closed-cosmos runtime — law sealing, holographic ticks, self-sustaining loop"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -23,3 +26,6 @@ thiserror = { workspace = true }
 parking_lot = { workspace = true }
 serde = { workspace = true }
 nalgebra = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

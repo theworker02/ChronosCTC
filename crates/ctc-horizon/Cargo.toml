@@ -3,7 +3,10 @@ name = "ctc-horizon"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Event-horizon persistence for sealed cosmos state across process epochs"
+readme = "README.md"
 
 [dependencies]
 ctc-genesis = { workspace = true }
@@ -14,3 +17,6 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 parking_lot = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

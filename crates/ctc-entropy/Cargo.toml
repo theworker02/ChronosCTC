@@ -3,7 +3,10 @@ name = "ctc-entropy"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Landauer thermodynamic work extractor and energy balancer"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -16,3 +19,6 @@ thiserror = { workspace = true }
 parking_lot = { workspace = true }
 serde = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

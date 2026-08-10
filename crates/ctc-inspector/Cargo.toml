@@ -3,7 +3,10 @@ name = "ctc-inspector"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Spatial multi-manifold timeline debugger & residual visualizer"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -16,3 +19,6 @@ parking_lot = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

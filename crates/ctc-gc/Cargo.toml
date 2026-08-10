@@ -3,7 +3,10 @@ name = "ctc-gc"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Entropy-based timeline garbage collector & branch pruner"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -13,3 +16,6 @@ thiserror = { workspace = true }
 parking_lot = { workspace = true }
 serde = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

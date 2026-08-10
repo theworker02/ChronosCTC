@@ -3,7 +3,10 @@ name = "ctc-kernel"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Chronal Fixed-Point Kernel — Anderson/Newton solvers for Deutsch consistency U(ρ)=ρ"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -11,3 +14,6 @@ thiserror = { workspace = true }
 nalgebra = { workspace = true }
 serde = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

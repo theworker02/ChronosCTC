@@ -1,0 +1,5 @@
+d08bdf047c3704a48387e9af2d1afe593390d0bcf28b40168e0ad826e57c49b4  RELEASE_NOTES.md
+9c4f33ecb346e12bbb0184ded5f433c0a0c9e08afd443a43ab436c75254b35f5  logo.svg
+82ae90621e5e87a06fbd6dd69be6551f6f36aaf400ebce2ac9a9e3e236ff216e  logo.png
+# Binary (rebuild with: cargo build -p ctc-cli --release && cp target/release/cronos-ctc releases/v0.6.0/)
+7ea5a94b5521172bed953367056671dcda1b4920a80e7be2d42ad8b4dfb5be4a  cronos-ctc

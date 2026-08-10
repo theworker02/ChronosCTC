@@ -27,6 +27,11 @@ version = "0.6.0"
 edition = "2021"
 license = "Apache-2.0"
 authors = ["Cronos-CTC Systems Architecture"]
+readme = "README.md"
+repository = "https://github.com/Mloon25/cronos-ctc"
+homepage = "https://github.com/Mloon25/cronos-ctc"
+keywords = ["ctc", "chronal", "retrocausal", "fixed-point", "holography"]
+categories = ["compilers", "science", "simulation"]
 
 [workspace.dependencies]
 ctc-dag = { path = "crates/ctc-dag" }

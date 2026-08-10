@@ -3,7 +3,10 @@ name = "ctc-pruner"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Paradox Pruner & Branch Manager — residual monitoring and timeline collapse"
+readme = "README.md"
 
 [dependencies]
 ctc-dag = { workspace = true }
@@ -12,3 +15,6 @@ thiserror = { workspace = true }
 parking_lot = { workspace = true }
 serde = { workspace = true }
 rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"

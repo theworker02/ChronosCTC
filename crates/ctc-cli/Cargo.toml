@@ -3,7 +3,10 @@ name = "ctc-cli"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
 description = "Cronos-CTC Phase 6 demonstration driver — Novikov closed cosmos"
+readme = "README.md"
 
 [[bin]]
 name = "cronos-ctc"
@@ -31,3 +34,6 @@ ctc-cosmos = { workspace = true }
 nalgebra = { workspace = true }
 serde = { workspace = true }
 toml = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"
