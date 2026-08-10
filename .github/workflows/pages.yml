@@ -32,7 +32,7 @@ jobs:
           mkdir -p _site/assets
           cp assets/logo.svg assets/logo.png _site/assets/
           # Keep README discoverable from the site root
-          cp README.md CHANGELOG.md LICENSE _site/ 2>/dev/null || true
+          cp README.md CHANGELOG.md LICENSE SECURITY.md PRIVACY.md CODE_OF_CONDUCT.md CONTRIBUTING.md SUPPORT.md _site/ 2>/dev/null || true
           # GitHub Pages project-site base path helper
           if [ -n "${{ github.event.repository.name }}" ]; then
             printf '%s\n' "${{ github.event.repository.name }}" > _site/.repo-name

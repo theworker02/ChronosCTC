@@ -1,31 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Cronos-CTC">
-  <defs>
-    <linearGradient id="ribbon" x1="64" y1="96" x2="448" y2="416" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#5AF0E0"/>
-      <stop offset="55%" stop-color="#2EE6D6"/>
-      <stop offset="100%" stop-color="#149E96"/>
-    </linearGradient>
-    <linearGradient id="horizon" x1="80" y1="400" x2="432" y2="120" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#C9A227" stop-opacity="0"/>
-      <stop offset="45%" stop-color="#C9A227"/>
-      <stop offset="100%" stop-color="#E6C65A" stop-opacity="0.2"/>
-    </linearGradient>
-  </defs>
-  <!-- charcoal tile -->
-  <rect width="512" height="512" rx="96" fill="#0B1220"/>
-  <!-- subtle manifold grid -->
-  <g stroke="#1A2740" stroke-width="2" opacity="0.9">
-    <path d="M64 160h384M64 256h384M64 352h384M160 64v384M256 64v384M352 64v384"/>
-  </g>
-  <!-- holographic horizon arc -->
-  <path d="M88 360c72-120 264-200 336-72" fill="none" stroke="url(#horizon)" stroke-width="10" stroke-linecap="round"/>
-  <!-- closed timelike curve (Möbius / figure-eight ribbon) -->
-  <path d="M156 300c0-78 52-128 100-128 40 0 60 28 100 28 52 0 88-40 88-96
-           M156 300c0 78 52 128 100 128 40 0 60-28 100-28 52 0 88 40 88 96
-           M356 204c0 54-28 84-72 84-36 0-56-28-100-28-60 0-112 56-112 132"
-        fill="none" stroke="url(#ribbon)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- chronal node accents -->
-  <circle cx="256" cy="256" r="14" fill="#E8FFF9"/>
-  <circle cx="168" cy="300" r="10" fill="#2EE6D6"/>
-  <circle cx="360" cy="204" r="10" fill="#C9A227"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <title>Cronos-CTC</title>
+  <rect width="512" height="512" rx="108" fill="#0B1220"/>
+  <!-- CTC / infinity ribbon -->
+  <path
+    d="M118 256
+       C118 186 168 138 226 138
+       C268 138 296 164 320 190
+       C344 216 368 236 394 236
+       C440 236 462 200 462 168
+       M394 276
+       C368 276 344 296 320 322
+       C296 348 268 374 226 374
+       C168 374 118 326 118 256
+       M226 138
+       C268 138 296 164 320 190
+       C344 216 368 236 394 236
+       C440 236 462 272 462 304
+       M394 276
+       C440 276 462 312 462 344
+       C462 390 424 430 370 430
+       C328 430 302 408 278 386
+       C254 364 230 342 198 342
+       C152 342 118 372 118 408"
+    stroke="#2EE6D6"
+    stroke-width="28"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- gold horizon tick -->
+  <path d="M96 400 C180 300 340 250 430 310" stroke="#C9A227" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+  <!-- chronal node -->
+  <circle cx="256" cy="256" r="18" fill="#E8FFF9"/>
+  <circle cx="256" cy="256" r="8" fill="#149E96"/>
 </svg>
