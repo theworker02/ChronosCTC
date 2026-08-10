@@ -23,6 +23,7 @@ use nalgebra::DVector;
 use std::sync::Arc;
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)] // retained for inspector / external consumers
 pub struct CosmosReport {
     pub holo_boundary_dim: usize,
     pub holo_von_neumann: f64,
