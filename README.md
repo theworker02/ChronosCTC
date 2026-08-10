@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://mloon25.github.io/cronos-ctc/"><img alt="pages" src="https://img.shields.io/badge/GitHub%20Pages-live-2EE6D6?style=for-the-badge"/></a>
-  <a href="https://github.com/Mloon25/cronos-ctc/actions/workflows/ci.yml"><img alt="ci" src="https://img.shields.io/github/actions/workflow/status/Mloon25/cronos-ctc/ci.yml?branch=main&style=for-the-badge&label=CI"/></a>
+  <a href="https://theworker02.github.io/ChronosCTC/"><img alt="pages" src="https://img.shields.io/badge/GitHub%20Pages-live-2EE6D6?style=for-the-badge"/></a>
+  <a href="https://github.com/theworker02/ChronosCTC/actions/workflows/ci.yml"><img alt="ci" src="https://img.shields.io/github/actions/workflow/status/theworker02/ChronosCTC/ci.yml?branch=main&style=for-the-badge&label=CI"/></a>
   <a href="https://crates.io/crates/ctc-cosmos"><img alt="crates.io" src="https://img.shields.io/crates/v/ctc-cosmos?style=for-the-badge&color=149E96"/></a>
   <img alt="version" src="https://img.shields.io/badge/version-0.6.0-2EE6D6?style=for-the-badge"/>
   <img alt="phase" src="https://img.shields.io/badge/phase-6%20Novikov-0B1220?style=for-the-badge"/>
@@ -91,7 +91,7 @@ cronos-ctc/
 
 The project site is built from [`site/`](site/) and deployed by GitHub Actions to
 
-**https://mloon25.github.io/cronos-ctc/**
+**https://theworker02.github.io/ChronosCTC/**
 
 ```bash
 # local preview

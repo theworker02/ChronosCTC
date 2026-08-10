@@ -4,7 +4,7 @@
 
 Site sources live in [`site/`](../site/). On every push to `main` that touches
 site assets, [`.github/workflows/pages.yml`](../.github/workflows/pages.yml)
-builds and deploys to **https://mloon25.github.io/cronos-ctc/**.
+builds and deploys to **https://theworker02.github.io/ChronosCTC/**.
 
 Enable once in the GitHub UI:
 

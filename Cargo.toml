@@ -28,8 +28,8 @@ edition = "2021"
 license = "Apache-2.0"
 authors = ["Cronos-CTC Systems Architecture"]
 readme = "README.md"
-repository = "https://github.com/Mloon25/cronos-ctc"
-homepage = "https://mloon25.github.io/cronos-ctc/"
+repository = "https://github.com/theworker02/ChronosCTC"
+homepage = "https://theworker02.github.io/ChronosCTC/"
 keywords = ["ctc", "chronal", "retrocausal", "fixed-point", "holography"]
 categories = ["compilers", "science", "simulation"]
 
