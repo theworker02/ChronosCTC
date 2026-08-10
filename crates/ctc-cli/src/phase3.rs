@@ -87,6 +87,7 @@ pub fn run_local_teleport(runtime: &RuntimeConfig) -> Result<TeleportReport, Str
 }
 
 /// Distributed teleportation: future solver node → past worker node via mesh.
+#[allow(dead_code)]
 pub fn run_mesh_teleport(runtime: &RuntimeConfig) -> Result<MeshTeleportReport, String> {
     let cluster = Arc::new(MeshCluster::new(runtime.mesh.clone()));
     let past_signal = Arc::new(SignalDaemon::new(runtime.signal.clone()));

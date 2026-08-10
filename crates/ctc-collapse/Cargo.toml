@@ -1,0 +1,18 @@
+[package]
+name = "ctc-collapse"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Proof-of-Consistency consensus and reality branch merger"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-ledger = { workspace = true }
+ctc-agents = { workspace = true }
+ctc-gc = { workspace = true }
+ctc-pruner = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }

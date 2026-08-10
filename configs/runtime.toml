@@ -65,3 +65,22 @@ timeout_ms = 50
 hop_latency_us = 10
 channel_capacity = 256
 require_awaiting = true
+
+[ledger]
+max_live_universes = 1024
+min_branch_weight = 1.0e-9
+retain_collapsed_history = true
+
+[agents]
+paradox_residual = 1.0
+suboptimal_weight = 0.05
+correction_scale = 0.01
+max_probes_per_tick = 8
+
+[collapse]
+consensus_margin = 0.02
+w_probability = 0.45
+w_consistency = 0.30
+w_entropy = 0.15
+w_agent_health = 0.10
+purge_losers = true

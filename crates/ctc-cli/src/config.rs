@@ -1,7 +1,10 @@
+use ctc_agents::AgentConfig;
 use ctc_bridge::{BridgeConfig, DeviceKind};
+use ctc_collapse::CollapseConfig;
 use ctc_gc::GcConfig;
 use ctc_inspector::InspectorConfig;
 use ctc_kernel::SolverConfig;
+use ctc_ledger::LedgerConfig;
 use ctc_mesh::MeshConfig;
 use ctc_pruner::PrunerConfig;
 use ctc_signal::SignalConfig;
@@ -10,6 +13,7 @@ use std::path::Path;
 use std::time::Duration;
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)] // full runtime surface retained across phase demos
 pub struct RuntimeConfig {
     pub solver: SolverSection,
     pub pruner: PrunerConfig,
@@ -22,6 +26,12 @@ pub struct RuntimeConfig {
     pub oracle: OracleSection,
     #[serde(default)]
     pub mesh: MeshConfig,
+    #[serde(default)]
+    pub ledger: LedgerConfig,
+    #[serde(default)]
+    pub agents: AgentConfig,
+    #[serde(default)]
+    pub collapse: CollapseConfig,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -148,6 +158,9 @@ impl Default for RuntimeConfig {
             signal: SignalConfig::default(),
             oracle: OracleSection::default(),
             mesh: MeshConfig::default(),
+            ledger: LedgerConfig::default(),
+            agents: AgentConfig::default(),
+            collapse: CollapseConfig::default(),
         }
     }
 }

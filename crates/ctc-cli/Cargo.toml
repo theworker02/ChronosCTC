@@ -3,7 +3,7 @@ name = "ctc-cli"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Cronos-CTC Phase 3 demonstration driver — inter-epoch teleportation fabric"
+description = "Cronos-CTC Phase 4 demonstration driver — multiversal consensus engine"
 
 [[bin]]
 name = "cronos-ctc"
@@ -20,6 +20,9 @@ ctc-inspector = { workspace = true }
 ctc-signal = { workspace = true }
 ctc-oracle = { workspace = true }
 ctc-mesh = { workspace = true }
+ctc-ledger = { workspace = true }
+ctc-agents = { workspace = true }
+ctc-collapse = { workspace = true }
 nalgebra = { workspace = true }
 serde = { workspace = true }
 toml = { workspace = true }
