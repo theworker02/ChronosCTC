@@ -1,0 +1,20 @@
+[package]
+name = "ctc-genesis"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Self-referential laws compiler and reality bootstrap engine"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-ledger = { workspace = true }
+ctc-holo = { workspace = true }
+ctc-entropy = { workspace = true }
+ctc-collapse = { workspace = true }
+ctc-signal = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }
+nalgebra = { workspace = true }

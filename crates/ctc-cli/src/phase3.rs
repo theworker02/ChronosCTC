@@ -17,6 +17,7 @@ use ctc_signal::{
 use std::sync::Arc;
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 pub struct TeleportReport {
     pub packet_id: u64,
     pub cycles_saved: u64,
@@ -26,6 +27,7 @@ pub struct TeleportReport {
 }
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 pub struct MeshTeleportReport {
     pub entanglement: u64,
     pub from: String,
@@ -36,6 +38,7 @@ pub struct MeshTeleportReport {
 }
 
 /// Local (single-node) retrocausal teleportation via signal + oracle.
+#[allow(dead_code)]
 pub fn run_local_teleport(runtime: &RuntimeConfig) -> Result<TeleportReport, String> {
     let signal = Arc::new(SignalDaemon::new(runtime.signal.clone()));
     let mut oracle = OracleEngine::new(Arc::clone(&signal));
@@ -169,6 +172,7 @@ pub fn run_mesh_teleport(runtime: &RuntimeConfig) -> Result<MeshTeleportReport, 
 }
 
 /// Strict Deutsch-gated teleport of a known fixed-point into the past.
+#[allow(dead_code)]
 pub fn run_deutsch_gated_teleport(runtime: &RuntimeConfig) -> Result<String, String> {
     use ctc_kernel::{ChronalKernel, FnEvolution, NonlinearSystem, SolverConfig};
     use nalgebra::DVector;

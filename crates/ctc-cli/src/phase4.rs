@@ -20,6 +20,7 @@ use nalgebra::DVector;
 use std::sync::Arc;
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 pub struct MultiverseReport {
     pub bifurcation_children: usize,
     pub agents_deployed: usize,

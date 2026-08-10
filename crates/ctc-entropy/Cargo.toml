@@ -1,0 +1,17 @@
+[package]
+name = "ctc-entropy"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Landauer thermodynamic work extractor and energy balancer"
+
+[dependencies]
+ctc-dag = { workspace = true }
+ctc-kernel = { workspace = true }
+ctc-ledger = { workspace = true }
+ctc-collapse = { workspace = true }
+ctc-holo = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }

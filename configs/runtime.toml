@@ -84,3 +84,27 @@ w_consistency = 0.30
 w_entropy = 0.15
 w_agent_health = 0.10
 purge_losers = true
+
+[holo]
+boundary_ratio = 0.35
+min_boundary_dim = 2
+max_boundary_dim = 256
+newton_g = 1.0
+reconstruct_tolerance = 1.0e-6
+
+[entropy]
+temperature_k = 300.0
+boltzmann_j_per_k = 1.380649e-23
+harvest_per_residual = 1.0e-21
+zero_energy_residual = 1.0e-12
+
+[genesis]
+law_learn_rate = 0.35
+max_meta_epochs = 12
+law_tolerance = 1.0e-6
+deutsch_tol_min = 1.0e-14
+deutsch_tol_max = 1.0e-4
+signal_speed_min = 0.25
+signal_speed_max = 4.0
+boundary_ratio_min = 0.15
+boundary_ratio_max = 0.75

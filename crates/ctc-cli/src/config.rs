@@ -1,7 +1,10 @@
 use ctc_agents::AgentConfig;
 use ctc_bridge::{BridgeConfig, DeviceKind};
 use ctc_collapse::CollapseConfig;
+use ctc_entropy::EntropyConfig;
 use ctc_gc::GcConfig;
+use ctc_genesis::GenesisConfig;
+use ctc_holo::HoloConfig;
 use ctc_inspector::InspectorConfig;
 use ctc_kernel::SolverConfig;
 use ctc_ledger::LedgerConfig;
@@ -32,9 +35,16 @@ pub struct RuntimeConfig {
     pub agents: AgentConfig,
     #[serde(default)]
     pub collapse: CollapseConfig,
+    #[serde(default)]
+    pub holo: HoloConfig,
+    #[serde(default)]
+    pub entropy: EntropyConfig,
+    #[serde(default)]
+    pub genesis: GenesisConfig,
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct OracleSection {
     pub timeout_ms: u64,
 }
@@ -161,6 +171,9 @@ impl Default for RuntimeConfig {
             ledger: LedgerConfig::default(),
             agents: AgentConfig::default(),
             collapse: CollapseConfig::default(),
+            holo: HoloConfig::default(),
+            entropy: EntropyConfig::default(),
+            genesis: GenesisConfig::default(),
         }
     }
 }
