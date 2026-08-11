@@ -7,7 +7,7 @@ repository.workspace = true
 homepage.workspace = true
 keywords.workspace = true
 categories.workspace = true
-description = "Cronos-CTC Phase 6 demonstration driver — Novikov closed cosmos"
+description = "Cronos-CTC Phase 7 demonstration driver — Chronal Continuum federation"
 readme = "README.md"
 include = ["src/**/*", "Cargo.toml", "README.md", "assets/**/*"]
 
@@ -34,6 +34,8 @@ ctc-entropy = { workspace = true }
 ctc-genesis = { workspace = true }
 ctc-horizon = { workspace = true }
 ctc-cosmos = { workspace = true }
+ctc-wormhole = { workspace = true }
+ctc-continuum = { workspace = true }
 nalgebra = { workspace = true }
 serde = { workspace = true }
 toml = { workspace = true }

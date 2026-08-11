@@ -13,8 +13,8 @@
   <a href="https://theworker02.github.io/ChronosCTC/"><img alt="pages" src="https://img.shields.io/badge/GitHub%20Pages-live-2EE6D6?style=plastic"/></a>
   <a href="https://github.com/theworker02/ChronosCTC/actions/workflows/ci.yml"><img alt="ci" src="https://img.shields.io/github/actions/workflow/status/theworker02/ChronosCTC/ci.yml?branch=main&style=plastic&label=CI"/></a>
   <a href="https://crates.io/crates/ctc-cosmos"><img alt="crates.io" src="https://img.shields.io/crates/v/ctc-cosmos?style=plastic&color=149E96"/></a>
-  <img alt="version" src="https://img.shields.io/badge/version-0.6.0-2EE6D6?style=plastic"/>
-  <img alt="phase" src="https://img.shields.io/badge/phase-6%20Novikov-0B1220?style=plastic"/>
+  <img alt="version" src="https://img.shields.io/badge/version-0.7.0-2EE6D6?style=plastic"/>
+  <img alt="phase" src="https://img.shields.io/badge/phase-7%20Continuum-0B1220?style=plastic"/>
   <img alt="license" src="https://img.shields.io/badge/license-Apache%202.0-C9A227?style=plastic"/>
   <img alt="rust" src="https://img.shields.io/badge/rust-edition%202021-orange?style=plastic"/>
   <a href="SECURITY.md"><img alt="security" src="https://img.shields.io/badge/security-policy-149E96?style=plastic"/></a>
@@ -23,7 +23,7 @@
 
 <p align="center">
   <a href="https://theworker02.github.io/ChronosCTC/">Website</a> ·
-  <a href="https://github.com/theworker02/ChronosCTC/releases/tag/v0.6.0">v0.6.0 Release</a> ·
+  <a href="https://github.com/theworker02/ChronosCTC/releases/tag/v0.7.0">v0.7.0 Release</a> ·
   <a href="docs/PUBLISHING.md">Publishing</a> ·
   <a href="CHANGELOG.md">Changelog</a>
 </p>

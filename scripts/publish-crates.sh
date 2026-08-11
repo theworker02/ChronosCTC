@@ -37,6 +37,8 @@ CRATES=(
   ctc-genesis
   ctc-horizon
   ctc-cosmos
+  ctc-wormhole
+  ctc-continuum
   ctc-cli
 )
 

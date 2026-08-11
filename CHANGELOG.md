@@ -5,6 +5,19 @@ All notable changes to Cronos-CTC are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] — 2026-08-11
+
+### Added — Phase 7: Chronal Continuum
+
+- **`ctc-wormhole`** — `WormholePortal`, `WormholePacket`, `open_portal` / `transmit` / `receive`
+- **`ctc-continuum`** — `ContinuumRuntime` with `admit` / `link` / `tick_federation` → `ContinuumReport`
+- Synthetic in-memory federation across wormhole-linked continuum regions
+- CLI Phase-7 continuum federation demo
+
+### Changed
+
+- Workspace version bumped to **0.7.0**
+
 ## [0.6.0] — 2026-08-10
 
 ### Added — Phase 6: Novikov Closed Cosmos
@@ -54,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`ctc-kernel`**, **`ctc-dag`**, **`ctc-compiler`**, **`ctc-pruner`**, **`ctc-cli`**
 - Anderson accelerated Deutsch fixed-point solver and worldline fabric
 
+[0.7.0]: CHANGELOG.md#070--2026-08-11
 [0.6.0]: releases/v0.6.0/RELEASE_NOTES.md
 [0.5.0]: CHANGELOG.md#050--2026-08-10
 [0.4.0]: CHANGELOG.md#040--2026-08-10

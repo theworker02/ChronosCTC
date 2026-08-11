@@ -1,10 +1,9 @@
-//! Cronos-CTC Phase 6 demonstration driver.
+//! Cronos-CTC Phase 7 demonstration driver.
 //!
-//! Novikov closed cosmos:
-//! 1. Genesis locks physical law vector Λ*
-//! 2. Seal rewrites live solver / signal / mesh / holo / thermo / GC
-//! 3. Holographic sustainment ticks with thermo↔GC coupling
-//! 4. Horizon checkpoint persists the sealed universe
+//! Chronal Continuum federation:
+//! 1. Admit continuum regions into a synthetic federation
+//! 2. Link regions via wormhole portals
+//! 3. Advance federation ticks and emit ContinuumReport
 
 mod config;
 mod phase2;
@@ -12,14 +11,15 @@ mod phase3;
 mod phase4;
 mod phase5;
 mod phase6;
+mod phase7;
 
 use phase2::ConvergenceObservationLoop;
 use ctc_compiler::{lower, parse_module};
 
 fn main() {
     println!("╔══════════════════════════════════════════════════════════╗");
-    println!("║         Cronos-CTC Chronal Runtime v0.6.0 (Phase 6)      ║");
-    println!("║  Cosmos · Horizon — Novikov Self-Sustaining Spacetime    ║");
+    println!("║         Cronos-CTC Chronal Runtime v0.7.0 (Phase 7)      ║");
+    println!("║  Continuum · Wormhole — Federated Chronal Spacetime      ║");
     println!("╚══════════════════════════════════════════════════════════╝\n");
 
     let runtime = config::load_runtime_config();
@@ -30,6 +30,8 @@ fn main() {
         runtime.genesis.max_meta_epochs
     );
 
+    phase7_continuum(&runtime);
+    println!();
     phase6_novikov(&runtime);
     println!();
     phase5_smoke(&runtime);
@@ -37,6 +39,28 @@ fn main() {
     phase4_smoke(&runtime);
     println!();
     phase2_smoke(&runtime);
+}
+
+fn phase7_continuum(runtime: &config::RuntimeConfig) {
+    println!("── Phase-7: Chronal Continuum Federation ──────────────────");
+    println!("  admit regions → wormhole link → federation ticks\n");
+
+    let report = phase7::run_continuum_federation(runtime).expect("continuum federation");
+    println!("  {}", report.message);
+    println!("  portals linked    : {}", report.portals_linked);
+    println!("  total packets     : {}", report.total_packets);
+    for t in &report.ticks {
+        println!(
+            "    tick {}: regions={} portals={} routed={} mean_E={:.4}",
+            t.tick, t.regions_active, t.portals_open, t.packets_routed, t.mean_energy
+        );
+    }
+    for r in &report.regions {
+        println!(
+            "    region {}: sent={} recv={} energy={:.4}",
+            r.name, r.packets_sent, r.packets_recv, r.energy
+        );
+    }
 }
 
 fn phase6_novikov(runtime: &config::RuntimeConfig) {

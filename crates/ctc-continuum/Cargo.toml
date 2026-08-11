@@ -1,0 +1,25 @@
+[package]
+name = "ctc-continuum"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "Federated chronal continuum runtime — wormhole-linked cosmos regions"
+readme = "README.md"
+include = ["src/**/*", "Cargo.toml", "README.md", "assets/**/*"]
+
+[dependencies]
+ctc-wormhole = { workspace = true }
+ctc-mesh = { workspace = true }
+ctc-collapse = { workspace = true }
+ctc-horizon = { workspace = true }
+thiserror = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+rustc-hash = { workspace = true }
+
+[package.metadata.cronos]
+logo = "assets/logo.svg"
