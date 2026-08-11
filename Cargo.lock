@@ -62,7 +62,7 @@ checksum = "61803da095bee82a81bb1a452ecc25d3b2f1416d1897eb86430c6159ef717c17"
 
 [[package]]
 name = "ctc-agents"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -77,7 +77,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-bridge"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-compiler",
  "ctc-dag",
@@ -92,12 +92,13 @@ dependencies = [
 
 [[package]]
 name = "ctc-cli"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-agents",
  "ctc-bridge",
  "ctc-collapse",
  "ctc-compiler",
+ "ctc-continuum",
  "ctc-cosmos",
  "ctc-dag",
  "ctc-entropy",
@@ -112,6 +113,7 @@ dependencies = [
  "ctc-oracle",
  "ctc-pruner",
  "ctc-signal",
+ "ctc-wormhole",
  "nalgebra",
  "serde",
  "toml",
@@ -119,7 +121,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-collapse"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-agents",
  "ctc-dag",
@@ -135,7 +137,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-compiler"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -147,8 +149,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "ctc-continuum"
+version = "0.7.0"
+dependencies = [
+ "ctc-collapse",
+ "ctc-horizon",
+ "ctc-mesh",
+ "ctc-wormhole",
+ "parking_lot",
+ "rustc-hash",
+ "serde",
+ "thiserror",
+]
+
+[[package]]
 name = "ctc-cosmos"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-agents",
  "ctc-collapse",
@@ -171,7 +187,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-dag"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "parking_lot",
  "rustc-hash",
@@ -182,7 +198,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-entropy"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-collapse",
  "ctc-dag",
@@ -198,7 +214,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-gc"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -211,7 +227,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-genesis"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-collapse",
  "ctc-dag",
@@ -229,7 +245,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-holo"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -243,7 +259,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-horizon"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-entropy",
  "ctc-genesis",
@@ -257,7 +273,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-inspector"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-bridge",
  "ctc-dag",
@@ -273,7 +289,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-kernel"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "nalgebra",
@@ -284,7 +300,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-ledger"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -297,7 +313,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-mesh"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -311,7 +327,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-oracle"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -324,7 +340,7 @@ dependencies = [
 
 [[package]]
 name = "ctc-pruner"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
@@ -336,11 +352,24 @@ dependencies = [
 
 [[package]]
 name = "ctc-signal"
-version = "0.6.0"
+version = "0.7.0"
 dependencies = [
  "ctc-dag",
  "ctc-kernel",
  "nalgebra",
+ "parking_lot",
+ "rustc-hash",
+ "serde",
+ "thiserror",
+]
+
+[[package]]
+name = "ctc-wormhole"
+version = "0.7.0"
+dependencies = [
+ "ctc-dag",
+ "ctc-mesh",
+ "ctc-signal",
  "parking_lot",
  "rustc-hash",
  "serde",
