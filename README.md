@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Chronal runtime for Deutsch-consistent closed timelike curves</strong><br/>
-  A self-compiling spacetime engine Ã¢â‚¬â€ from fixed-point kernels to Novikov cosmologies.
+  A self-compiling spacetime engine ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â from fixed-point kernels to Novikov cosmologies.
 </p>
 
 <p align="center">
@@ -15,28 +15,7 @@
   <a href="https://crates.io/crates/ctc-cosmos"><img alt="crates.io" src="https://img.shields.io/crates/v/ctc-cosmos?style=plastic&color=149E96"/></a>
   <img alt="version" src="https://img.shields.io/badge/version-0.7.0-2EE6D6?style=plastic"/>
   <img alt="phase" src="https://img.shields.io/badge/phase-7%20Continuum-0B1220?style=plastic"/>
-  <img alt="license" src="https://img.shields.io/badge/license-Apache%202.0-C9A227?style=plastic"/>
-  <img alt="rust" src="https://img.shields.io/badge/rust-edition%202021-orange?style=plastic"/>
-  <a href="SECURITY.md"><img alt="security" src="https://img.shields.io/badge/security-policy-149E96?style=plastic"/></a>
-  <a href="PRIVACY.md"><img alt="privacy" src="https://img.shields.io/badge/privacy-policy-2EE6D6?style=plastic"/></a>
-</p>
-
-<p align="center">
-  <a href="https://theworker02.github.io/ChronosCTC/">Website</a> Ã‚Â·
-  <a href="https://github.com/theworker02/ChronosCTC/releases/tag/v0.7.0">v0.7.0 Release</a> Ã‚Â·
-  <a href="docs/PUBLISHING.md">Publishing</a> Ã‚Â·
-  <a href="CHANGELOG.md">Changelog</a>
-</p>
-
----
-
-## Overview
-
-Cronos-CTC is an experimental **Rust workspace** that treats computation as a
-problem on a spacetime manifold rather than a von Neumann instruction stream.
-
-Retrocausal programs do not Ã¢â‚¬Å“step forward.Ã¢â‚¬Â They converge to chronal states
-\(\rho\) that satisfy the **Deutsch consistency condition**
+  <img alt="license" src="https://img.shields.io/badge/license-proprietary-0B1F33) that satisfy the **Deutsch consistency condition**
 
 \[
 U(\rho)=\rho
@@ -57,16 +36,16 @@ horizon-persisted self-sustaining ticks.
 
 ## Features
 
-- **Deutsch fixed-point kernel** Ã¢â‚¬â€ Anderson-accelerated multi-start basin search with unique / multi-weighted / paradox classification
-- **Worldline DAG memory** Ã¢â‚¬â€ immutable spacetime fabric indexed by \((a,\tau)\)
-- **Retrocausal DSL compiler** Ã¢â‚¬â€ cyclic dependency graphs Ã¢â€ â€™ fixed-point equations
-- **Hardware bridge** Ã¢â‚¬â€ FPGA / GPU / annealer preference routing with CPU fallback
-- **Cross-epoch signalling** Ã¢â‚¬â€ Deutsch-gated teleportation across proper time
-- **Multiversal ledger** Ã¢â‚¬â€ fork, score, and Proof-of-Consistency collapse
-- **Holographic boundary** Ã¢â‚¬â€ AdS/CFT-style bulkÃ¢â€ â€™boundary compression (`ctc-holo`)
-- **Landauer thermodynamics** Ã¢â‚¬â€ bit-erasure / prune energy accounting (`ctc-entropy`)
-- **Genesis meta-compiler** Ã¢â‚¬â€ workload-driven rewrite of physical law parameters
-- **Novikov runtime** Ã¢â‚¬â€ seal \(\Lambda^\star\) onto the live stack and sustain ticks (`ctc-cosmos`)
+- **Deutsch fixed-point kernel** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Anderson-accelerated multi-start basin search with unique / multi-weighted / paradox classification
+- **Worldline DAG memory** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â immutable spacetime fabric indexed by \((a,\tau)\)
+- **Retrocausal DSL compiler** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â cyclic dependency graphs ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ fixed-point equations
+- **Hardware bridge** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â FPGA / GPU / annealer preference routing with CPU fallback
+- **Cross-epoch signalling** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Deutsch-gated teleportation across proper time
+- **Multiversal ledger** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fork, score, and Proof-of-Consistency collapse
+- **Holographic boundary** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â AdS/CFT-style bulkÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢boundary compression (`ctc-holo`)
+- **Landauer thermodynamics** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â bit-erasure / prune energy accounting (`ctc-entropy`)
+- **Genesis meta-compiler** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â workload-driven rewrite of physical law parameters
+- **Novikov runtime** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â seal \(\Lambda^\star\) onto the live stack and sustain ticks (`ctc-cosmos`)
 
 ## Quick start
 
@@ -99,7 +78,7 @@ Runtime knobs live in [`configs/runtime.toml`](configs/runtime.toml):
 
 | Section | Controls |
 |---------|----------|
-| `[solver]` | Anderson depth, tolerance ÃŽÂµ, restarts, domain |
+| `[solver]` | Anderson depth, tolerance ÃƒÅ½Ã‚Âµ, restarts, domain |
 | `[bridge]` | CTC / classical device preference & cost model |
 | `[signal]` / `[mesh]` | Deutsch gate & hop latency |
 | `[holo]` / `[entropy]` / `[genesis]` | Boundary ratio, Landauer T, meta-epochs |
@@ -109,30 +88,30 @@ Runtime knobs live in [`configs/runtime.toml`](configs/runtime.toml):
 
 ```text
 ChronosCTC/
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ crates/
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-kernel/      # Deutsch consistency solver & nonlinear runtime
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-dag/         # Topological worldline memory fabric
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-compiler/    # Cyclic graphs Ã¢â€ â€™ fixed-point equations
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-pruner/      # Paradox / residual branch pruner
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-bridge/      # FPGA / GPU / annealer offload HAL
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-inspector/   # Ãâ€ž-scrub debugger & residual telemetry
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-gc/          # Entropy-aware timeline garbage collector
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-signal/      # Cross-epoch binary teleportation
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-oracle/      # Pre-cognitive branch interception
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-mesh/        # Distributed temporal entanglement network
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-ledger/      # Omniversal multi-timeline ledger
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-agents/      # Cross-temporal navigation agents
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-collapse/    # Proof-of-Consistency reality merger
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-holo/        # AdS/CFT holographic boundary projection
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-entropy/     # Landauer thermodynamic work extractor
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-genesis/     # Self-referential physical-laws compiler
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-horizon/     # Event-horizon persistence for sealed cosmos
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ctc-cosmos/      # Novikov closed-cosmos seal & tick runtime
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ ctc-cli/         # End-to-end demonstration driver (bin: cronos-ctc)
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ site/                # GitHub Pages source
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ configs/             # runtime.toml
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ scripts/             # publish / push helpers
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ releases/            # versioned release notes + checksums
+ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ crates/
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-kernel/      # Deutsch consistency solver & nonlinear runtime
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-dag/         # Topological worldline memory fabric
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-compiler/    # Cyclic graphs ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ fixed-point equations
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-pruner/      # Paradox / residual branch pruner
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-bridge/      # FPGA / GPU / annealer offload HAL
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-inspector/   # ÃƒÂÃ¢â‚¬Å¾-scrub debugger & residual telemetry
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-gc/          # Entropy-aware timeline garbage collector
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-signal/      # Cross-epoch binary teleportation
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-oracle/      # Pre-cognitive branch interception
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-mesh/        # Distributed temporal entanglement network
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-ledger/      # Omniversal multi-timeline ledger
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-agents/      # Cross-temporal navigation agents
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-collapse/    # Proof-of-Consistency reality merger
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-holo/        # AdS/CFT holographic boundary projection
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-entropy/     # Landauer thermodynamic work extractor
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-genesis/     # Self-referential physical-laws compiler
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-horizon/     # Event-horizon persistence for sealed cosmos
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-cosmos/      # Novikov closed-cosmos seal & tick runtime
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡   ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬ÂÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ctc-cli/         # End-to-end demonstration driver (bin: cronos-ctc)
+ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ site/                # GitHub Pages source
+ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ configs/             # runtime.toml
+ÃƒÂ¢Ã¢â‚¬ÂÃ…â€œÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ scripts/             # publish / push helpers
+ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬ÂÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ releases/            # versioned release notes + checksums
 ```
 
 ### Phase map
@@ -140,27 +119,27 @@ ChronosCTC/
 | Phase | Theme | Crates |
 |------:|-------|--------|
 | 1 | Fixed-point CTC kernel | `ctc-kernel`, `ctc-dag`, `ctc-compiler`, `ctc-pruner` |
-| 2 | Bridge Ã‚Â· Inspector Ã‚Â· GC | `ctc-bridge`, `ctc-inspector`, `ctc-gc` |
+| 2 | Bridge Ãƒâ€šÃ‚Â· Inspector Ãƒâ€šÃ‚Â· GC | `ctc-bridge`, `ctc-inspector`, `ctc-gc` |
 | 3 | Retrocausal teleportation | `ctc-signal`, `ctc-oracle`, `ctc-mesh` |
 | 4 | Multiversal consensus | `ctc-ledger`, `ctc-agents`, `ctc-collapse` |
-| 5 | Holography Ã‚Â· Thermo Ã‚Â· Genesis | `ctc-holo`, `ctc-entropy`, `ctc-genesis` |
+| 5 | Holography Ãƒâ€šÃ‚Â· Thermo Ãƒâ€šÃ‚Â· Genesis | `ctc-holo`, `ctc-entropy`, `ctc-genesis` |
 | 6 | Novikov closed cosmos | `ctc-cosmos`, `ctc-horizon` |
 
 ### Cosmological lifecycle (Phase 6)
 
 1. **Genesis** locks physical laws \(\Lambda^\star = G(W(\Lambda^\star))\)
-2. **Seal** rewrites live solver ÃŽÂµ, signal Deutsch gate, mesh hop latency, holo ratio, thermo/GC
-3. **Tick** runs holographic boundary solves with Landauer Ã¢â€ â€ GC coupling
+2. **Seal** rewrites live solver ÃƒÅ½Ã‚Âµ, signal Deutsch gate, mesh hop latency, holo ratio, thermo/GC
+3. **Tick** runs holographic boundary solves with Landauer ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Â GC coupling
 4. **Horizon** checkpoints the sealed universe for process resurrection
 
 ```text
-bulk DAG Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº ctc-holo boundary Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº ctc-entropy Landauer
-                                         Ã¢â€â€š
-                                         Ã¢â€“Â¼
-                              ctc-genesis law fixed point ÃŽâ€º*
-                                         Ã¢â€â€š
-                                         Ã¢â€“Â¼
-                         ctc-cosmos seal Ã¢â€ â€™ sustain Ã¢â€ â€™ ctc-horizon
+bulk DAG ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬â€œÃ‚Âº ctc-holo boundary ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬â€œÃ‚Âº ctc-entropy Landauer
+                                         ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡
+                                         ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¼
+                              ctc-genesis law fixed point ÃƒÅ½Ã¢â‚¬Âº*
+                                         ÃƒÂ¢Ã¢â‚¬ÂÃ¢â‚¬Å¡
+                                         ÃƒÂ¢Ã¢â‚¬â€œÃ‚Â¼
+                         ctc-cosmos seal ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ sustain ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ ctc-horizon
 ```
 
 ## Crate index (crates.io)
@@ -172,7 +151,7 @@ bulk DAG Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº ctc-holo boundary 
 | [`ctc-compiler`](https://crates.io/crates/ctc-compiler) | Retrocausal DSL lowering |
 | [`ctc-pruner`](https://crates.io/crates/ctc-pruner) | Paradox branch pruner |
 | [`ctc-bridge`](https://crates.io/crates/ctc-bridge) | Device offload HAL |
-| [`ctc-inspector`](https://crates.io/crates/ctc-inspector) | Residual / Ãâ€ž debugger |
+| [`ctc-inspector`](https://crates.io/crates/ctc-inspector) | Residual / ÃƒÂÃ¢â‚¬Å¾ debugger |
 | [`ctc-gc`](https://crates.io/crates/ctc-gc) | Timeline garbage collector |
 | [`ctc-signal`](https://crates.io/crates/ctc-signal) | Cross-epoch packets |
 | [`ctc-oracle`](https://crates.io/crates/ctc-oracle) | Injection-point oracle |
@@ -245,7 +224,7 @@ python3 -m http.server --directory site 8080
 See [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
 
 ```bash
-export CARGO_REGISTRY_TOKEN=Ã¢â‚¬Â¦   # https://crates.io/settings/tokens
+export CARGO_REGISTRY_TOKEN=ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦   # https://crates.io/settings/tokens
 ./scripts/publish-crates.sh
 ```
 
